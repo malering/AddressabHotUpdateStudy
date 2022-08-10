@@ -6,6 +6,7 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.AddressableAssets.ResourceLocators;
+using UnityEngine.AddressableAssets.ResourceProviders;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.UI;
 
@@ -88,13 +89,17 @@ public class IncrementalUpdateTest : MonoBehaviour
         var asyncOperationHandle = Addressables.InitializeAsync();
         yield return asyncOperationHandle;
 
-        // var versionCode = "";
-        // var kCacheDataFolder =
-        //     $"{UnityEngine.Application.persistentDataPath}/com.unity.addressables/catalog_{versionCode}.json";
-        // var kCacheDataFolder1 =
-        //     $"{UnityEngine.Application.persistentDataPath}/com.unity.addressables/catalog_{versionCode}.hash";
-        // File.Delete(kCacheDataFolder);
-        // File.Delete(kCacheDataFolder1);
+        // 简易的删除catalog，如果出现catalog下载了，但是其实剩余的资源没有下载完游戏退出去了，下次进来，因为catalog还在所以CheckForCatalogUpdates的返回结果是0
+        // 简单用删除catalog的方式触发重新下载
+        // 但是不能每次都删除吧，这样每次都会删除后触发下载
+
+        var versionCode = "";
+        var kCacheDataFolder =
+            $"{UnityEngine.Application.persistentDataPath}/com.unity.addressables/catalog_{versionCode}.json";
+        var kCacheDataFolder1 =
+            $"{UnityEngine.Application.persistentDataPath}/com.unity.addressables/catalog_{versionCode}.hash";
+        File.Delete(kCacheDataFolder);
+        File.Delete(kCacheDataFolder1);
 
         // var loadContentCatalogAsync = Addressables.LoadContentCatalogAsync(kCacheDataFolder);
         // yield return loadContentCatalogAsync;
