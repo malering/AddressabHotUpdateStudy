@@ -19,7 +19,7 @@ MonoBehaviour:
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 1
   m_BundleLocalCatalog: 0
-  m_CatalogRequestsTimeout: 0
+  m_CatalogRequestsTimeout: 15
   m_DisableCatalogUpdateOnStart: 1
   m_IgnoreUnsupportedFilesInBuild: 0
   m_UniqueBundleIds: 0
@@ -32,7 +32,7 @@ MonoBehaviour:
   m_ShaderBundleNaming: 0
   m_ShaderBundleCustomNaming: 
   m_MonoScriptBundleNaming: 0
-  m_CheckForContentUpdateRestrictionsOption: 0
+  m_CheckForContentUpdateRestrictionsOption: 2
   m_BuildAndReleaseBinFileOption: 0
   m_MonoScriptBundleCustomNaming: 
   m_RemoteCatalogBuildPath:
@@ -43,18 +43,13 @@ MonoBehaviour:
   m_CustomContentStateBuildPath: 
   m_ContentStateBuildPath: 
   m_BuildAddressablesWithPlayerBuild: 0
-  m_overridePlayerVersion: 
+  m_overridePlayerVersion: 0.0.2
   m_GroupAssets:
   - {fileID: 11400000, guid: 01efb8d2b5c6fad46a13d74844e8a8f5, type: 2}
   - {fileID: 11400000, guid: 97599e0d449ce6b4395f0ec466e783b2, type: 2}
   - {fileID: 11400000, guid: 64a1b38cfae18cc4a8e00ede68517e7d, type: 2}
   - {fileID: 11400000, guid: d8d3160d9acebe548956e17c47dbc35d, type: 2}
-  - {fileID: 11400000, guid: 2ee306382729930419e2fb1178069741, type: 2}
-  - {fileID: 11400000, guid: e955dcf02580e424a8fbd50a09574605, type: 2}
-  - {fileID: 11400000, guid: 83ae1a36d9e54384fba4835e9fa7f1f6, type: 2}
-  - {fileID: 11400000, guid: aad3510d3dcebac489ff2cd049cf65f0, type: 2}
-  - {fileID: 11400000, guid: 7c357ae692616f249aac86809de23034, type: 2}
-  - {fileID: 11400000, guid: ed724e0a5b161ff4aa6b5211061a3d36, type: 2}
+  - {fileID: 11400000, guid: 4e8a878e3c0dbe141847b7bf3e850217, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -113,6 +108,8 @@ MonoBehaviour:
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 9dd48a94f4a9d124eaee7239cab18744, type: 2}
+  - {fileID: 11400000, guid: 9cb7ae60d67a8554383a2cc93061ecd1, type: 2}
+  - {fileID: 11400000, guid: 7e80b4efd603b784188744108b6a63d9, type: 2}
   - {fileID: 11400000, guid: 7dcf8eb0f51889b42b912260825d7f7c, type: 2}
   m_InitializationObjects: []
   m_CertificateHandlerType:
@@ -141,7 +138,7 @@ MonoBehaviour:
           m_Key: HostingServiceUploadSpeed
         - m_AssemblyName: mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
           m_ClassName: System.String
-          m_Data: Library/com.unity.addressables/aa/Windows/StandaloneWindows64;ServerData/StandaloneWindows64;
+          m_Data: Library/com.unity.addressables/aa/Windows/StandaloneWindows64;ServerData/StandaloneWindows64
           m_Key: ContentRoot
         - m_AssemblyName: mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
           m_ClassName: System.Boolean

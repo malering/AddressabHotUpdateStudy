@@ -1,0 +1,140 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: RemoteDynamic
+  m_EditorClassIdentifier: 
+  m_GroupName: RemoteDynamic
+  m_Data:
+    m_SerializedData: []
+  m_GUID: b9ca209e5be65b64e9603d70a870a1ca
+  m_SerializeEntries:
+  - m_GUID: 6b77b96d3fa22ee4ba5f23c5efe65c2e
+    m_Address: Characters
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cf05c3bb9b9ba0142ab660fa4c94612d
+    m_Address: Environment
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9f325eead25e1894aaece3f10cab73d0
+    m_Address: Towers
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5a40393d843b9884a8b0ccf4e4f3f4db
+    m_Address: UI
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9f2451c327d86b84699405d5b633d806
+    m_Address: VFX
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dff8b0df1ea259b4ca1ba90941cff5c3
+    m_Address: ENVGround_MAT_sand2_D
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ff5abccd26a5c6246b4f4147db92bd73
+    m_Address: ENVGround_MAT_sand2_M
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 94150ef328c647e49b37ca33d6e00049
+    m_Address: ENVGround_MAT_sand2_N
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 39cda7c360bbe5c49b7398e359fd96d4
+    m_Address: TEX_ENVProps1_D
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 199a0299de7895c42a50a1ea0f528263
+    m_Address: TEX_ENVProps1_M
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 64ff4cb8a886c0741bc805b13d6a7f8b
+    m_Address: TEX_ENVProps1_N
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 942b56444a9f9c84ea4934bb9b8457ba
+    m_Address: TEX_ENVProps2_D
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aa147d123bf64ad4cafd64793c3e2c10
+    m_Address: TEX_ENVProps2_M
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f096b7d7a36de14469cb8497767ee83a
+    m_Address: TEX_ENVProps2_N
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 113c166ec8f4f95489965d9da293d67c
+    m_Address: TEX_ENVTrees_D
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7422c2f4d4de8a043869fd8c08d39e0f
+    m_Address: TEX_ENVTrees_M
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9c3d2b0ed825a5d46a1754d608db5346
+    m_Address: TEX_ENVTrees_N
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 12ca85147caf35b4883f2cc8c9194f00
+    m_Address: TEX_FarmHouse_D
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d38f4fb2c96805943beaf0bebdfb9c25
+    m_Address: TEX_FarmHouse_M
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f3be0f3f62c59d548adcb07e69f863cf
+    m_Address: TEX_FarmHouse_N
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 27e42048a2a434b67976c9d92615406f
+    m_Address: TEX_grass3_D_v2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8e58cc9e5add9e2468322adce679ce95
+    m_Address: TEX_grass3_M
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6965dee2b92b84649baaf84ef01202db
+    m_Address: TEX_grass3_N
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: e9becd4c4a51ddc46ac4373082da6e66, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 4f12a3d290c68944bbf5bd6afabbde7e, type: 2}
+    - {fileID: 11400000, guid: 23da84d17edf3524ab2f485c81e3f753, type: 2}
