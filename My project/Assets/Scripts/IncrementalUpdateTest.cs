@@ -137,35 +137,39 @@ public class IncrementalUpdateTest : MonoBehaviour
 
         foreach (var resourceLocator in resourceLocators)
         {
+            long totalSize = 0;
             foreach (var resourceLocatorKey in resourceLocator.Keys)
             {
                 var downloadSizeAsync = Addressables.GetDownloadSizeAsync(resourceLocatorKey);
                 yield return downloadSizeAsync;
                 var downloadSize = downloadSizeAsync.Result;
-
-                // 下载
-                // 下载大小等于0，可能该资源资源已经下载完在设备中
-                if (downloadSize > 0)
-                {
-                    var downloadDependenciesAsync = Addressables.DownloadDependenciesAsync(resourceLocatorKey);
-                    while (!downloadDependenciesAsync.IsDone)
-                    {
-                        if (downloadDependenciesAsync.Status == AsyncOperationStatus.Failed)
-                        {
-                            Debug.LogError("DownloadDependenciesAsync error");
-                            yield break;
-                        }
-
-                        yield return null;
-                    }
-
-                    // if (downloadDependenciesAsync.Status == AsyncOperationStatus.Succeeded)
-                    {
-                        Debug.Log(
-                            $"{resourceLocator.LocatorId} 下载完毕 {downloadDependenciesAsync.Status} {resourceLocatorKey} downloadSize:{downloadSize}");
-                    }
-                }
+                totalSize += downloadSize;
+                // if (downloadSize > 0)
+                // {
+                //     var downloadDependenciesAsync = Addressables.DownloadDependenciesAsync(resourceLocatorKey);
+                //     while (!downloadDependenciesAsync.IsDone)
+                //     {
+                //         if (downloadDependenciesAsync.Status == AsyncOperationStatus.Failed)
+                //         {
+                //             Debug.LogError("DownloadDependenciesAsync error");
+                //             yield break;
+                //         }
+                //
+                //         yield return null;
+                //     }
+                // }
             }
+
+            var downloadDependenciesAsync =
+                Addressables.DownloadDependenciesAsync(resourceLocator.Keys, Addressables.MergeMode.Union);
+            while (!downloadDependenciesAsync.IsDone)
+            {
+                var percentComplete = downloadDependenciesAsync.PercentComplete;
+                Debug.Log($"下载进度:{percentComplete}");
+                yield return null;
+            }
+
+            Debug.Log($"下载进度结束");
         }
     }
 
