@@ -1,0 +1,125 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Content Update2
+  m_EditorClassIdentifier: 
+  m_GroupName: Content Update2
+  m_Data:
+    m_SerializedData: []
+  m_GUID: a486304d55c81c44d90812a39274f86c
+  m_SerializeEntries:
+  - m_GUID: 1d11a17d2e06aa344aec53b0369e5b1f
+    m_Address: Assets/Res/Model1/Archer_Bindpose 2.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dde6eabf76288ab45b8315c278c17fb7
+    m_Address: Assets/Res/Model1/Archer_Bindpose 1.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ef66557383460484285f54d9d4f8e851
+    m_Address: Assets/Res/Model1/Archer_Bindpose 3.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e3d3d92a62064d44aa97c971de385429
+    m_Address: Assets/Res/Model1/Archer_Bindpose 4.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0a1894aa6a9ddb745896e8fcb6c249ff
+    m_Address: Assets/Res/Model1/Archer_Bindpose 5.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c0a3b63c98e8b304ea187dc61dd42217
+    m_Address: Assets/Res/Model1/Archer_Bindpose 6.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 326fbf74a4b4edf4392d96d70e255332
+    m_Address: Assets/Res/Model1/Archer_Bindpose 7.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ac72e35c49f504349962ed02169029c8
+    m_Address: Assets/Res/Model1/Archer_Bindpose 8.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 07162c214d1f9fd479adfebdbb66fcbf
+    m_Address: Assets/Res/Model1/Archer_Bindpose 9.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2befc295b601aa7498ac3a2c84872654
+    m_Address: Assets/Res/Model1/Archer_Bindpose.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b2ecd3c52a065dd4ab42ff77e9aa356a
+    m_Address: Assets/Res/Model1/Mage_Bindpose 1.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 17110a85a14937c428535e6af7b87922
+    m_Address: Assets/Res/Model1/Mage_Bindpose 2.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2af5be3c4752a3947ae893b25a4ef7dd
+    m_Address: Assets/Res/Model1/Mage_Bindpose 3.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3fa9a6eb7fa9ce645ac6ef3b627457c1
+    m_Address: Assets/Res/Model1/Mage_Bindpose 4.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7b06ce678134b7144a6bc37f6eb0013f
+    m_Address: Assets/Res/Model1/Mage_Bindpose 5.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bee200a5fa5adc74cafe4e43e65c40a3
+    m_Address: Assets/Res/Model1/Mage_Bindpose 6.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 34f295c83837c8b4a97742cb26e5318b
+    m_Address: Assets/Res/Model1/Mage_Bindpose 7.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0ab76975df0c0e54dac9b4378b6b5709
+    m_Address: Assets/Res/Model1/Mage_Bindpose 8.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1620abc8a1a9e614c9090ed9651607c4
+    m_Address: Assets/Res/Model1/Mage_Bindpose 9.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7c3235b0794facd428ecd34c8cc8b55c
+    m_Address: Assets/Res/Model1/Mage_Bindpose.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: e9becd4c4a51ddc46ac4373082da6e66, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 9225b2d63e78a844780819932ddce764, type: 2}
+    - {fileID: 11400000, guid: 53e5aa2c68f9b62488527126d1069474, type: 2}

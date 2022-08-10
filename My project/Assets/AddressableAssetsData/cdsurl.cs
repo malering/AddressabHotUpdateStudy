@@ -1,0 +1,1 @@
+class CCD { public static string cds_url = "https://assetstreaming-content.unity.cn/client_api/v1/buckets/92545d8a-52b8-48f9-a94c-4e4c0efceeb5/release_by_badge/latest/entry_by_path/content"; }
