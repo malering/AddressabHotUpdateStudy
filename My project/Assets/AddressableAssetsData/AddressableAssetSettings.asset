@@ -43,13 +43,14 @@ MonoBehaviour:
   m_CustomContentStateBuildPath: 
   m_ContentStateBuildPath: 
   m_BuildAddressablesWithPlayerBuild: 0
-  m_overridePlayerVersion: 0.0.2
+  m_overridePlayerVersion: 0.0.3
   m_GroupAssets:
   - {fileID: 11400000, guid: 01efb8d2b5c6fad46a13d74844e8a8f5, type: 2}
   - {fileID: 11400000, guid: 97599e0d449ce6b4395f0ec466e783b2, type: 2}
   - {fileID: 11400000, guid: 64a1b38cfae18cc4a8e00ede68517e7d, type: 2}
   - {fileID: 11400000, guid: d8d3160d9acebe548956e17c47dbc35d, type: 2}
   - {fileID: 11400000, guid: 4e8a878e3c0dbe141847b7bf3e850217, type: 2}
+  - {fileID: 11400000, guid: 624268a8a0ad70f4cbdd94faa06b8e16, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -105,6 +106,7 @@ MonoBehaviour:
   m_LabelTable:
     m_LabelNames:
     - default
+    - RemoteRes
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 9dd48a94f4a9d124eaee7239cab18744, type: 2}

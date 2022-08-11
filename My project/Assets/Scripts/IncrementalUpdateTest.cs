@@ -1,33 +1,70 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using System.Text;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using UnityEngine.AddressableAssets.ResourceLocators;
-using UnityEngine.AddressableAssets.ResourceProviders;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.UI;
+using UnityTemplateProjects;
 
 // 增量更新测试
 public class IncrementalUpdateTest : MonoBehaviour
 {
-    public string sceneAddressToLoad;
-
+    /// <summary>
+    /// 下载目录
+    /// </summary>
     public Button startCheckCatalogDownloadBtn;
+
+    /// <summary>
+    /// 需要下载资源大小
+    /// </summary>
+    public Button checkDownloadSizeBtn;
+
+    /// <summary>
+    /// 下载资源
+    /// </summary>
+    public Button downloadResBtn;
+
+    /// <summary>
+    /// 加载资源
+    /// </summary>
     public Button loadAssetsBtn;
-    public Button loadSceneBtn;
+
     public Button clearCacheBtn;
+
+    public Image downloadProgress;
+    
+    private AsyncOperationHandle _downloadOperationHandle;
 
     // Start is called before the first frame update
     void Start()
     {
-        // Addressables.InitializeAsync();
+        Addressables.InitializeAsync();
+
         startCheckCatalogDownloadBtn.onClick.AddListener(StartCheckCatalogAndDownload);
+        checkDownloadSizeBtn.onClick.AddListener(StartCheckTotalDownloadSize);
+        downloadResBtn.onClick.AddListener(StartDownloadRes);
         loadAssetsBtn.onClick.AddListener(StartLoadAssets);
-        loadSceneBtn.onClick.AddListener(LoadRemoveScene);
         clearCacheBtn.onClick.AddListener(CacheClear);
+        downloadProgress.fillAmount = 0;
+    }
+
+    private void Update()
+    {
+        if (_downloadOperationHandle.IsValid())
+        {
+            var percent = _downloadOperationHandle.GetDownloadStatus().Percent;
+            if (percent < 1)
+            {
+                Debug.Log($"下载进度:{percent}");
+                downloadProgress.fillAmount = percent;
+            }
+            else if (_downloadOperationHandle.IsDone)
+            {
+                Addressables.Release(_downloadOperationHandle);
+                Debug.Log($"下载结束");
+            }
+        }
     }
 
     private void CacheClear()
@@ -81,34 +118,16 @@ public class IncrementalUpdateTest : MonoBehaviour
     }
 
     /// <summary>
-    /// 检测资源目录和资源目录下载
+    /// 仅仅检测资源目录并下载
     /// </summary>
     /// <returns></returns>
     public IEnumerator CheckCatalogAndDownload()
     {
-        var asyncOperationHandle = Addressables.InitializeAsync();
-        yield return asyncOperationHandle;
-
-        // 简易的删除catalog，如果出现catalog下载了，但是其实剩余的资源没有下载完游戏退出去了，下次进来，因为catalog还在所以CheckForCatalogUpdates的返回结果是0
-        // 简单用删除catalog的方式触发重新下载
-        // 但是不能每次都删除吧，这样每次都会删除后触发下载
-
-        var versionCode = "";
-        var kCacheDataFolder =
-            $"{UnityEngine.Application.persistentDataPath}/com.unity.addressables/catalog_{versionCode}.json";
-        var kCacheDataFolder1 =
-            $"{UnityEngine.Application.persistentDataPath}/com.unity.addressables/catalog_{versionCode}.hash";
-        File.Delete(kCacheDataFolder);
-        File.Delete(kCacheDataFolder1);
-
-        // var loadContentCatalogAsync = Addressables.LoadContentCatalogAsync(kCacheDataFolder);
-        // yield return loadContentCatalogAsync;
-        // var resourceLocator = loadContentCatalogAsync.Result;
-
         var checkForCatalogUpdates = Addressables.CheckForCatalogUpdates(false);
         yield return checkForCatalogUpdates;
         if (checkForCatalogUpdates.Result.Count > 0)
         {
+            Debug.Log("目录开始更新");
             var operationHandle = Addressables.UpdateCatalogs(true, checkForCatalogUpdates.Result, false);
             yield return operationHandle;
 
@@ -117,64 +136,56 @@ public class IncrementalUpdateTest : MonoBehaviour
                 yield break;
             }
 
-            var resourceLocators = operationHandle.Result;
-            yield return DownloadNewRes(resourceLocators);
             Addressables.Release(checkForCatalogUpdates);
             Addressables.Release(operationHandle);
+            Debug.Log("目录更新完毕");
         }
         else
         {
-            Debug.Log("没有检测到更新");
+            Debug.Log("目录已经是最新");
         }
     }
 
-    public IEnumerator DownloadNewRes(List<IResourceLocator> resourceLocators)
+    public string remoteResLabel = "RemoteRes";
+
+    public void StartCheckTotalDownloadSize()
     {
-        if (resourceLocators.Count < 1)
-        {
-            yield break;
-        }
-
-        foreach (var resourceLocator in resourceLocators)
-        {
-            long totalSize = 0;
-            foreach (var resourceLocatorKey in resourceLocator.Keys)
-            {
-                var downloadSizeAsync = Addressables.GetDownloadSizeAsync(resourceLocatorKey);
-                yield return downloadSizeAsync;
-                var downloadSize = downloadSizeAsync.Result;
-                totalSize += downloadSize;
-                // if (downloadSize > 0)
-                // {
-                //     var downloadDependenciesAsync = Addressables.DownloadDependenciesAsync(resourceLocatorKey);
-                //     while (!downloadDependenciesAsync.IsDone)
-                //     {
-                //         if (downloadDependenciesAsync.Status == AsyncOperationStatus.Failed)
-                //         {
-                //             Debug.LogError("DownloadDependenciesAsync error");
-                //             yield break;
-                //         }
-                //
-                //         yield return null;
-                //     }
-                // }
-            }
-
-            var downloadDependenciesAsync =
-                Addressables.DownloadDependenciesAsync(resourceLocator.Keys, Addressables.MergeMode.Union);
-            while (!downloadDependenciesAsync.IsDone)
-            {
-                var percentComplete = downloadDependenciesAsync.PercentComplete;
-                Debug.Log($"下载进度:{percentComplete}");
-                yield return null;
-            }
-
-            Debug.Log($"下载进度结束");
-        }
+        StartCoroutine(CheckTotalDownloadSize());
     }
 
-    public void LoadRemoveScene()
+    /// <summary>
+    /// 总共要下载多少资源
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator CheckTotalDownloadSize()
     {
-        Addressables.LoadSceneAsync(sceneAddressToLoad);
+        // 所有要远程下载的资源都加上该标签
+        var downloadSizeAsync = Addressables.GetDownloadSizeAsync(remoteResLabel);
+        var byteSize = downloadSizeAsync.Result;
+        if (byteSize > 0)
+        {
+            var sizeValue = ByteTransferHelper.GetMB(byteSize);
+            Debug.Log($"需要下载 [{sizeValue}]MB的内容");
+        }
+        else
+        {
+            Debug.Log($"没有资源需要下载");
+        }
+
+        yield break;
+    }
+
+    public void StartDownloadRes()
+    {
+        StartCoroutine(DownloadRes());
+    }
+
+    /// <summary>
+    /// 下载还未下载的资源
+    /// </summary>
+    public IEnumerator DownloadRes()
+    {
+        _downloadOperationHandle = Addressables.DownloadDependenciesAsync(remoteResLabel);
+        yield return _downloadOperationHandle;
     }
 }
