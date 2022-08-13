@@ -6,17 +6,15 @@ using UnityEngine.AddressableAssets;
 
 public class LoadDll : MonoBehaviour
 {
-    private string _dllAssetName = "HotFix";
+    private string _dllAssetName = "HotFix.dll";
     private System.Reflection.Assembly _gameAssembly;
 
-    private void Start()
-    {
-        LoadGameDll();
-    }
-
     // 1. 加载dll 2.执行dll的初始化代码
-    private void LoadGameDll()
+    public void LoadGameDll()
     {
+        // var asyncOperationHandle = Addressables.LoadAssetAsync<TextAsset>(_dllAssetName);
+        // var dllBytes = asyncOperationHandle.WaitForCompletion();
+
 #if !UNITY_EDITOR
         var dllBytes = Addressables.LoadAssetAsync<TextAsset>(_dllAssetName).WaitForCompletion();
         // var asyncOperationHandle = Addressables.LoadAssetAsync<TextAsset>(_dllAssetName);

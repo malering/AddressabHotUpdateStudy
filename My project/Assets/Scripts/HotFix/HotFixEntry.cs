@@ -5,20 +5,9 @@ using UnityEngine.AddressableAssets;
 
 public static class HotFixEntry
 {
-    /// 注意，补充元数据是给AOT dll补充元数据，而不是给热更新dll补充元数据。
-    /// 热更新dll不缺元数据，不需要补充，如果调用LoadMetadataForAOTAssembly会返回错误
-    /// 
-    private static readonly List<string> AotDllList = new List<string>
+    private static List<string> _hotFixDlls = new List<string>()
     {
-        "mscorlib.dll",
-        "System.dll",
-        "System.Core.dll", // 如果使用了Linq，需要这个
-        // "Newtonsoft.Json.dll",
-        // "protobuf-net.dll",
-        // "Google.Protobuf.dll",
-        // "MongoDB.Bson.dll",
-        // "DOTween.Modules.dll",
-        // "UniTask.dll",
+        "HotFix.dll",
     };
 
     public static void Start()
@@ -26,7 +15,6 @@ public static class HotFixEntry
 #if !UNITY_EDITOR
         LoadMetadataForAOTAssembly();
 #else
-        // 开始游戏
         StartGame();
 #endif
     }
@@ -40,7 +28,8 @@ public static class HotFixEntry
         // 可以加载任意aot assembly的对应的dll。但要求dll必须与unity build过程中生成的裁剪后的dll一致，而不能直接使用原始dll。
         // 我们在BuildProcessor_xxx里添加了处理代码，这些裁剪后的dll在打包时自动被复制到 {项目目录}/HybridCLRData/AssembliesPostIl2CppStrip/{Target} 目录。
 
-        foreach (var dllPath in AotDllList)
+        // 要先下载好资源
+        foreach (var dllPath in _hotFixDlls)
         {
             var dllAsset = Addressables.LoadAssetAsync<TextAsset>(dllPath).WaitForCompletion();
             var dllBytes = dllAsset.bytes;
@@ -54,7 +43,6 @@ public static class HotFixEntry
 
     private static void StartGame()
     {
-        // 游戏开始
-        Addressables.LoadSceneAsync("SampleScene");
+        Debug.Log("热更新结束");
     }
 }
