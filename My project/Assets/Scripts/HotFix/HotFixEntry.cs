@@ -7,7 +7,7 @@ public static class HotFixEntry
 {
     private static List<string> _hotFixDlls = new List<string>()
     {
-        "HotFix.dll",
+        LoadDll.dllAssetName,
     };
 
     public static void Start()
@@ -25,10 +25,10 @@ public static class HotFixEntry
     /// </summary>
     private static unsafe void LoadMetadataForAOTAssembly()
     {
+        Debug.Log("LoadMetadataForAOTAssembly，开始");
         // 可以加载任意aot assembly的对应的dll。但要求dll必须与unity build过程中生成的裁剪后的dll一致，而不能直接使用原始dll。
         // 我们在BuildProcessor_xxx里添加了处理代码，这些裁剪后的dll在打包时自动被复制到 {项目目录}/HybridCLRData/AssembliesPostIl2CppStrip/{Target} 目录。
 
-        // 要先下载好资源
         foreach (var dllPath in _hotFixDlls)
         {
             var dllAsset = Addressables.LoadAssetAsync<TextAsset>(dllPath).WaitForCompletion();
@@ -36,13 +36,14 @@ public static class HotFixEntry
             fixed (byte* ptr = dllBytes)
             {
                 var err = HybridCLR.RuntimeApi.LoadMetadataForAOTAssembly((IntPtr)ptr, dllBytes.Length);
-                Debug.Log($"LoadMetadataForAOTAssembly:{dllAsset}. ret:{err}");
+                Debug.Log($"LoadMetadataForAOTAssembly:{dllPath}. ret:{err}");
             }
         }
+        Debug.Log("LoadMetadataForAOTAssembly，完成");
     }
 
     private static void StartGame()
     {
-        Debug.Log("热更新结束");
+        Debug.Log("加载Dll完成，开始");
     }
 }

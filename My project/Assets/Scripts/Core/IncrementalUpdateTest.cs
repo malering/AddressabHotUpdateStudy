@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.UI;
-using UnityTemplateProjects;
 
 // 增量更新测试
 public class IncrementalUpdateTest : MonoBehaviour
@@ -39,7 +37,8 @@ public class IncrementalUpdateTest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Addressables.InitializeAsync();
+        Addressables.InitializeAsync().WaitForCompletion();
+        Debug.Log("可寻址初始化结束");
         startCheckCatalogDownloadBtn.onClick.AddListener(StartCheckCatalogAndDownload);
         checkDownloadSizeBtn.onClick.AddListener(StartCheckTotalDownloadSize);
         downloadResBtn.onClick.AddListener(StartDownloadRes);
@@ -55,7 +54,7 @@ public class IncrementalUpdateTest : MonoBehaviour
             var percent = _downloadOperationHandle.GetDownloadStatus().Percent;
             if (percent < 1)
             {
-                Debug.Log($"下载进度:{percent}");
+                // Debug.Log($"下载进度:{percent}");
                 downloadProgress.fillAmount = percent;
             }
             else if (_downloadOperationHandle.IsDone)
@@ -122,6 +121,7 @@ public class IncrementalUpdateTest : MonoBehaviour
     /// <returns></returns>
     public IEnumerator CheckCatalogAndDownload()
     {
+        Debug.Log("检查目录");
         var checkForCatalogUpdates = Addressables.CheckForCatalogUpdates(false);
         yield return checkForCatalogUpdates;
         if (checkForCatalogUpdates.Result.Count > 0)

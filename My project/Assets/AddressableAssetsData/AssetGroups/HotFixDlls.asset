@@ -18,24 +18,28 @@ MonoBehaviour:
   m_GUID: d84bceeaf3f83554c829651d4753da83
   m_SerializeEntries:
   - m_GUID: 58257e87cb49c514a888a22d8b773a19
-    m_Address: HotFix.dll
+    m_Address: HotFix
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - RemoteRes
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5423263cbf7f4b2458cc0970d4defb42
-    m_Address: mscorlib.dll
+    m_Address: mscorlib
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - RemoteRes
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 140f84b2b7a9d744e985d8948fb83524
-    m_Address: System.Core.dll
+    m_Address: System
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - RemoteRes
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7c5e40c990f85014c84b5abbec735dfd
-    m_Address: System.dll
+    m_Address: System
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - RemoteRes
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: e9becd4c4a51ddc46ac4373082da6e66, type: 2}

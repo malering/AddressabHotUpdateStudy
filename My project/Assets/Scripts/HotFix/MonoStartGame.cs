@@ -9,6 +9,10 @@ public class MonoStartGame : MonoBehaviour
     
     public void GameStart()
     {
-        text.text = "游戏开始";
+        if (text != null)
+        {
+            Debug.Log($"{text} 文本，游戏开始");
+            text.text = "游戏开始";
+        }
     }
 }
