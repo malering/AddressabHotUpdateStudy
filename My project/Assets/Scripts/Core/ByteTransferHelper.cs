@@ -1,14 +1,20 @@
 using System;
 using System.Collections.Generic;
 
+public enum ByteUnitType
+{
+    BYTE,
+    KB,
+    MB,
+    GB,
+}
+
     public class ByteTransferHelper
     {
-        private static Dictionary<string, double> _dict = new Dictionary<string, double>();
-
-        public static double GetMB(long kSize)
+        public static double GetMB(long kSize, ByteUnitType byteUnitType)
         {
-            ByteConversionGBMBKB(kSize);
-            var d = _dict["MB"];
+            if (kSize == 0) return 0;
+            var d = ByteConversionGBMBKB(kSize, byteUnitType);
             return d;
         }
 
@@ -17,28 +23,23 @@ using System.Collections.Generic;
         /// </summary>
         /// <param name="kSize"></param>
         /// <returns></returns>
-        public static void ByteConversionGBMBKB(long kSize)
+        public static double ByteConversionGBMBKB(long kSize, ByteUnitType byteUnitType)
         {
-            _dict.Clear();
-            int GB = 1024 * 1024 * 1024; //定义GB的计算常量
-            int MB = 1024 * 1024; //定义MB的计算常量
-            int KB = 1024; //定义KB的计算常量
-
-            if (kSize / GB >= 1) //如果当前Byte的值大于等于1GB
+            switch (byteUnitType)
             {
-                _dict.Add("GB", Math.Round(kSize / (float)GB, 2)); //将其转换成GB
-            }
-            else if (kSize / MB >= 1) //如果当前Byte的值大于等于1MB
-            {
-                _dict.Add("MB", Math.Round(kSize / (float)MB, 2)); //将其转换成MB
-            }
-            else if (kSize / KB >= 1) //如果当前Byte的值大于等于1KB
-            {
-                _dict.Add("KB", Math.Round(kSize / (float)KB, 2)); //将其转换成KB
-            }
-            else
-            {
-                _dict.Add("Byte", kSize); //显示Byte值
+                case ByteUnitType.BYTE:
+                    return kSize;
+                case ByteUnitType.KB:
+                    int KB = 1024; //定义KB的计算常量
+                    return Math.Round(kSize / (float) KB, 2);
+                case ByteUnitType.MB:
+                    int MB = 1024 * 1024; //定义MB的计算常量
+                    return Math.Round(kSize / (float) MB, 2);
+                case ByteUnitType.GB:
+                    int GB = 1024 * 1024 * 1024; //定义GB的计算常量
+                    return Math.Round(kSize / (float) GB, 2);
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(byteUnitType), byteUnitType, null);
             }
         }
     }

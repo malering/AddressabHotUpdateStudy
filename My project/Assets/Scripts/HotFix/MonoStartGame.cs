@@ -5,14 +5,9 @@ using UnityEngine.UI;
 
 public class MonoStartGame : MonoBehaviour
 {
-    public Text text;
-    
-    public void GameStart()
+    public void Start()
     {
-        if (text != null)
-        {
-            Debug.Log($"{text} 文本，游戏开始");
-            text.text = "游戏开始";
-        }
+        Debug.Log($"cube mono");
+        Debug.Log("hot fix 1");
     }
 }

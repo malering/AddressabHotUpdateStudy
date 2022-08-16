@@ -42,7 +42,6 @@ public class IncrementalUpdateTest : MonoBehaviour
         startCheckCatalogDownloadBtn.onClick.AddListener(StartCheckCatalogAndDownload);
         checkDownloadSizeBtn.onClick.AddListener(StartCheckTotalDownloadSize);
         downloadResBtn.onClick.AddListener(StartDownloadRes);
-        loadAssetsBtn.onClick.AddListener(StartLoadAssets);
         clearCacheBtn.onClick.AddListener(CacheClear);
         downloadProgress.fillAmount = 0;
     }
@@ -82,37 +81,6 @@ public class IncrementalUpdateTest : MonoBehaviour
     public void StartCheckCatalogAndDownload()
     {
         StartCoroutine(CheckCatalogAndDownload());
-    }
-
-    public void StartLoadAssets()
-    {
-        StartCoroutine(LoadAssets());
-    }
-
-    public IEnumerator LoadAssets()
-    {
-        var preLabel = "Pre";
-        var updateLabel = "Update";
-        var labels = new List<string>();
-        labels.Add(preLabel);
-        labels.Add(updateLabel);
-
-        foreach (var label in labels)
-        {
-            var asyncOperationHandle = Addressables.LoadAssetsAsync<GameObject>(label, null);
-            yield return asyncOperationHandle;
-            if (asyncOperationHandle.Status == AsyncOperationStatus.Succeeded)
-            {
-                var gameObjects = asyncOperationHandle.Result;
-                foreach (var o in gameObjects)
-                {
-                    Instantiate(o);
-                }
-            }
-        }
-
-        Addressables.InstantiateAsync("Capsule 7");
-        Addressables.InstantiateAsync("Cube (4)");
     }
 
     /// <summary>
@@ -163,7 +131,7 @@ public class IncrementalUpdateTest : MonoBehaviour
         var byteSize = downloadSizeAsync.Result;
         if (byteSize > 0)
         {
-            var sizeValue = ByteTransferHelper.GetMB(byteSize);
+            var sizeValue = ByteTransferHelper.GetMB(byteSize, ByteUnitType.MB);
             Debug.Log($"需要下载 [{sizeValue}]MB的内容");
         }
         else

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using Object = System.Object;
 
 public static class HotFixEntry
 {
@@ -14,9 +15,8 @@ public static class HotFixEntry
     {
 #if !UNITY_EDITOR
         LoadMetadataForAOTAssembly();
-#else
-        StartGame();
 #endif
+        StartGame();
     }
 
     /// <summary>
@@ -44,6 +44,11 @@ public static class HotFixEntry
 
     private static void StartGame()
     {
-        Debug.Log("加载Dll完成，开始");
+        Debug.Log("加载Dll完成，开始，热更新1");
+        Addressables.LoadAssetAsync<GameObject>("Cube").Completed += handle =>
+        {
+            Debug.Log($"cube log: {handle.Result}");
+            UnityEngine.Object.Instantiate(handle.Result);
+        };
     }
 }
