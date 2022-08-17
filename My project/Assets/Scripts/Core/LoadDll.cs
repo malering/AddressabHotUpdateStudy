@@ -11,17 +11,10 @@ public class LoadDll : MonoBehaviour
     private System.Reflection.Assembly _gameAssembly;
 
     // 1. 加载dll 2.执行dll的初始化代码
-    public void LoadGameDll()
+    public async void LoadGameDll()
     {
-        var s = Addressables.ResourceLocators;
-        Addressables.LoadAssetAsync<TextAsset>(dllAssetName).Completed += handle =>
-        {
-            Debug.Log(handle.Result);
-        };
-
-
 #if !UNITY_EDITOR
-        var dllBytes = Addressables.LoadAssetAsync<TextAsset>(dllAssetName).WaitForCompletion();
+        var dllBytes = await Addressables.LoadAssetAsync<TextAsset>(dllAssetName).Task;
         // var asyncOperationHandle = Addressables.LoadAssetAsync<TextAsset>(dllAssetName);
         // yield return asyncOperationHandle;
         // var dllBytes = asyncOperationHandle.Result;

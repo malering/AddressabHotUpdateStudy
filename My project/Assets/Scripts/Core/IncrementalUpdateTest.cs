@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -13,6 +14,8 @@ public class IncrementalUpdateTest : MonoBehaviour
     /// </summary>
     public Button startCheckCatalogDownloadBtn;
 
+    public Button checkVersionBtn;
+    
     /// <summary>
     /// 需要下载资源大小
     /// </summary>
@@ -23,11 +26,6 @@ public class IncrementalUpdateTest : MonoBehaviour
     /// </summary>
     public Button downloadResBtn;
 
-    /// <summary>
-    /// 加载资源
-    /// </summary>
-    public Button loadAssetsBtn;
-
     public Button clearCacheBtn;
 
     public Image downloadProgress;
@@ -35,11 +33,12 @@ public class IncrementalUpdateTest : MonoBehaviour
     private AsyncOperationHandle _downloadOperationHandle;
 
     // Start is called before the first frame update
-    void Start()
+    async void Start()
     {
-        Addressables.InitializeAsync().WaitForCompletion();
+        await Addressables.InitializeAsync().Task;
         Debug.Log("可寻址初始化结束");
         startCheckCatalogDownloadBtn.onClick.AddListener(StartCheckCatalogAndDownload);
+        checkVersionBtn.onClick.AddListener(StartCheckVersion);
         checkDownloadSizeBtn.onClick.AddListener(StartCheckTotalDownloadSize);
         downloadResBtn.onClick.AddListener(StartDownloadRes);
         clearCacheBtn.onClick.AddListener(CacheClear);
@@ -61,20 +60,6 @@ public class IncrementalUpdateTest : MonoBehaviour
                 Addressables.Release(_downloadOperationHandle);
                 Debug.Log($"下载结束");
             }
-        }
-    }
-
-    private void CacheClear()
-    {
-        var clearCache = Caching.ClearCache();
-        if (clearCache)
-        {
-            Debug.Log("清除缓存");
-        }
-
-        else
-        {
-            Debug.Log("没有清除缓存");
         }
     }
 
@@ -113,12 +98,30 @@ public class IncrementalUpdateTest : MonoBehaviour
         }
     }
 
-    public string remoteResLabel = "RemoteRes";
+    public void StartCheckVersion()
+    {
+        StartCoroutine(CheckVersion());
+    }
+
+    public IEnumerator CheckVersion()
+    {
+        var versionJsonFile = Addressables.LoadAssetAsync<TextAsset>("Version");
+        yield return versionJsonFile;
+        var jsonData = versionJsonFile.Result.text;
+        var version = JsonConvert.DeserializeObject<Version>(jsonData);
+        Debug.Log($"当前版本：{version.versionCode}, 强制更新：{version.forceUpdate}");
+        if (version.forceUpdate)
+        {
+            Debug.Log("版本提示，需要强制更新APP");
+        }
+    }
 
     public void StartCheckTotalDownloadSize()
     {
         StartCoroutine(CheckTotalDownloadSize());
     }
+    
+    public string remoteResLabel = "RemoteRes";
 
     /// <summary>
     /// 总共要下载多少资源
@@ -154,5 +157,19 @@ public class IncrementalUpdateTest : MonoBehaviour
     {
         _downloadOperationHandle = Addressables.DownloadDependenciesAsync(remoteResLabel);
         yield return _downloadOperationHandle;
+    }
+    
+    private void CacheClear()
+    {
+        var clearCache = Caching.ClearCache();
+        if (clearCache)
+        {
+            Debug.Log("清除缓存");
+        }
+
+        else
+        {
+            Debug.Log("没有清除缓存");
+        }
     }
 }
